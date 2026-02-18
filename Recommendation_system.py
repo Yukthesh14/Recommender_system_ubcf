@@ -1,20 +1,24 @@
 import pandas as pd
+#load datset
 df=pd.read_csv(r"E:\Datascience\Recommendation engine\Dataset (1)\Datasets_Recommendation Engine\game.csv")
+#Data inspection
 df.info()
 df.describe()
 df.isnull().sum()
-#Created user item matrix
+#Created user item matrix for recommender system
 user_item_matrix = df.pivot_table(index='userId', columns='game', values='rating')
 
 # Fill missing values with 0 (for similarity computation)
 user_item_matrix_filled = user_item_matrix.fillna(0)
 print(user_item_matrix_filled.head())
+#Exploratory data analysis
 print("Shape:", df.shape)
 print("\nSummary Statistics:")
 print(df.describe())
 print("\nTop Rated Games:")
 print(df.groupby('game')['rating'].mean().sort_values(ascending=False).head(10))
 
+#Univariate Analysis
 import matplotlib.pyplot as plt
 
 # Rating distribution
@@ -94,5 +98,6 @@ print(recommend_games(3))
 top_selling = df['game'].value_counts().head(10)
 print("Top-Selling DVDs:")
 print(top_selling)
+
 
 
