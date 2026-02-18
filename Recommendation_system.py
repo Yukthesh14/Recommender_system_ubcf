@@ -1,33 +1,14 @@
-#Business Understanding
-#Business Objective
-#Increase DVD sales
-
-# Constraints
-#Limited user data
-#Sparse ratings
-
-#data Understanding
-
-#Feature	Data Type	Description
-#userId	Integer	Unique ID representing each customer/user
-#game	Categorical (String)	Name of the video game DVD rated by the user
-#rating	Float	Rating given by the user to the game (preference score)
-
 import pandas as pd
 df=pd.read_csv(r"E:\Datascience\Recommendation engine\Dataset (1)\Datasets_Recommendation Engine\game.csv")
 df.info()
 df.describe()
 df.isnull().sum()
-df['userId'].nunique()
-df['game'].nunique()
-df.value_counts()
+#Created user item matrix
 user_item_matrix = df.pivot_table(index='userId', columns='game', values='rating')
 
 # Fill missing values with 0 (for similarity computation)
 user_item_matrix_filled = user_item_matrix.fillna(0)
-
 print(user_item_matrix_filled.head())
-
 print("Shape:", df.shape)
 print("\nSummary Statistics:")
 print(df.describe())
@@ -114,8 +95,4 @@ top_selling = df['game'].value_counts().head(10)
 print("Top-Selling DVDs:")
 print(top_selling)
 
-#Impact of solution
-#Personalized recommendations
-#Increased customer satisfaction
-#Higher DVD sales
-#Better inventory planning
+
